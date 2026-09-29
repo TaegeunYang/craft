@@ -41,7 +41,8 @@ python tools/render_figures.py path/to/Figures
 
 ## TODO
 
-- [ ] Co-author names and homepage links (`index.html` hero, BibTeX)
+- [x] Co-author names
+- [ ] Author homepage links (`index.html` hero)
 - [ ] arXiv link and ID (Paper button, BibTeX)
 - [ ] Code link (Code button)
 - [ ] Rollout videos (table above); set `--video-ratio` in `static/css/style.css` to match them

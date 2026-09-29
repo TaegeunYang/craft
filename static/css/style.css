@@ -106,7 +106,6 @@ p { margin: 0 0 1em; }
 .authors a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line-strong); }
 .authors a:hover { border-bottom-color: var(--ink); }
 .authors .sep { margin-right: 0.45em; color: var(--ink-3); }
-.todo { color: var(--ink-3); border-bottom: 1px dashed var(--ink-3); }
 .affil { color: var(--ink-2); margin: 0 0 28px; }
 
 .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 48px; }
