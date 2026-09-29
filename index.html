@@ -28,7 +28,7 @@
       <svg class="brand-hammer" viewBox="0 0 32 16" aria-hidden="true">
         <rect x="0.5" y="6.1" width="23" height="3.4" rx="1.7" fill="#c9914a"/>
         <rect x="0.5" y="6.1" width="7.5" height="3.4" rx="1.7" fill="#8f5d25"/>
-        <path d="M22.2 0.8h5.6l.8 2.2v8h1.4v4.2h-10V11h1.4V3z" fill="#2b2f34"/>
+        <path d="M22.3 15.3H26.8V12.4H26.35V11.6H26.8V3.8C26.8 1.6 24.4 0.2 20 0.4C22 1.2 22.3 2.4 22.3 3.8V11.6H22.75V12.4H22.3Z" fill="#2b2f34"/>
       </svg>
       <svg class="brand-spark" viewBox="0 0 16 8" aria-hidden="true">
         <path d="M4.5 7 1.5 4M11.5 7l3-3M8 5.5V1.5" fill="none" stroke="#e8a317" stroke-width="1.6" stroke-linecap="round"/>
@@ -184,10 +184,34 @@
   <div class="container">
     <p class="eyebrow">Motivation</p>
     <h2>Fine-tuned VLAs struggle with new skill combinations</h2>
+
+    <div class="split aside-wide">
+      <div class="split-text">
+        <p>LIBERO-Goal contains six pick-and-place tasks, each pairing an object with a target. These tasks define the demonstrated combinations (✓). From the same objects and targets, we construct five undemonstrated combinations (○) for evaluation. Every constituent pick and place skill appears in at least one demonstrated task; only the combination is new.</p>
+        <p>For example, “put the wine bottle on the stove” combines picking the wine bottle (tasks 1 and 4) with placing on the stove (task 6). The highlighted cells mark this example below.</p>
+      </div>
+      <div class="split-aside">
+        <p class="table-cap">Object–target combinations in LIBERO-Goal</p>
+        <div class="matrix-wrap">
+          <table class="combo-matrix">
+            <thead>
+              <tr><th></th><th scope="col">cabinet top</th><th scope="col">rack</th><th scope="col">plate</th><th scope="col">stove</th><th scope="col">bowl</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">wine bottle</th><td class="demo">✓<span class="idx">1</span></td><td class="demo is-executed">✓<span class="idx">4</span><span class="cell-tag">executed</span></td><td class="undemo">○</td><td class="undemo is-instructed">○<span class="cell-tag">instructed</span></td><td></td></tr>
+              <tr><th scope="row">bowl</th><td class="demo">✓<span class="idx">2</span></td><td></td><td class="demo">✓<span class="idx">3</span></td><td class="demo">✓<span class="idx">6</span></td><td></td></tr>
+              <tr><th scope="row">cream cheese</th><td class="undemo">○</td><td></td><td class="undemo">○</td><td class="undemo">○</td><td class="demo">✓<span class="idx">5</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="matrix-legend">✓ demonstrated task (index) · ○ undemonstrated, evaluated · blank: not evaluated</p>
+      </div>
+    </div>
+
     <div class="split">
       <div class="split-text">
-        <p>We evaluate publicly released LIBERO-Goal checkpoints of four VLAs without further training. On five object–target combinations built from the suite’s own pick-and-place skills, success drops sharply, even though every constituent skill appears in a demonstrated task.</p>
-        <p>When these rollouts complete a task other than the instructed one, it is almost always a demonstrated task that shares the object or the target with the instruction. This behavior is consistent with a <strong>vision shortcut</strong>: during fine-tuning, the visual observation can serve as a proxy for the instruction.</p>
+        <p>We evaluate publicly released LIBERO-Goal checkpoints of four VLAs without further training. Success is 88.8–97.4% on the demonstrated combinations but only 2.0–50.9% on the undemonstrated ones.</p>
+        <p>When a rollout completes a task other than the instructed one, it is almost always a demonstrated task that shares the object or the target with the instruction. This behavior is consistent with a <strong>vision shortcut</strong>: during fine-tuning, the visual observation can serve as a proxy for the instruction.</p>
       </div>
       <div class="split-aside">
         <p class="table-cap">LIBERO-Goal success (%), mean ± std over three seeds</p>
@@ -210,13 +234,24 @@
     <div class="fig-pair">
       <figure class="fig">
         <img src="static/images/vision_shortcut.webp" width="1400" height="422" loading="lazy" alt="Four frames of a LIBERO-Goal rollout for the instruction put the wine bottle on the stove: the policy grasps the wine bottle and places it on the rack.">
-        <figcaption>Given “put the wine bottle on the stove,” the fine-tuned π<sub>0.5</sub> policy grasps the instructed object but places it on the rack, completing the demonstrated “put the wine bottle on the rack” task instead.</figcaption>
+        <figcaption class="io">
+          <span class="io-k">Instructed</span>
+          <span class="io-v">“put the wine bottle on the stove” <span class="pill pill-instructed">○ undemonstrated</span></span>
+          <span class="io-k">Executed</span>
+          <span class="io-v">“put the wine bottle on the rack” <span class="pill pill-executed">✓ demonstrated · task 4</span></span>
+        </figcaption>
       </figure>
       <figure class="fig">
         <img src="static/images/empty_instruction.webp" width="1400" height="800" loading="lazy" alt="Two rollouts with an empty instruction: in trial 1 the policy turns on the stove; in trial 2 it puts the bowl on the plate.">
-        <figcaption>With an empty instruction, the same policy still executes demonstrated tasks: it turns on the stove in one trial and puts the bowl on the plate in another.</figcaption>
+        <figcaption class="io">
+          <span class="io-k">Instructed</span>
+          <span class="io-v io-empty">(empty instruction)</span>
+          <span class="io-k">Executed</span>
+          <span class="io-v">Trial 1: “turn on the stove” <span class="pill pill-executed">✓ task 8</span><br>Trial 2: “put the bowl on the plate” <span class="pill pill-executed">✓ task 3</span></span>
+        </figcaption>
       </figure>
     </div>
+    <p class="fig-note">Rollouts of the released π<sub>0.5</sub> LIBERO-Goal checkpoint. Task indices follow the ten original LIBERO-Goal tasks.</p>
   </div>
 </section>
 
@@ -322,12 +357,15 @@
       <img src="static/images/instruction_change.webp" width="2400" height="594" loading="lazy" alt="Six frames of a rollout where the instruction changes during execution: the robot keeps approaching the red cube when only the placement target changes, redirects to the blue cube when the picking target changes, and changes its destination during placing to the yellow plate.">
       <figcaption>The robot keeps approaching the red cube when only the future placement target changes (1→2→3), redirects when the picking target changes (3→4), then changes its destination during placement (5→6), placing the blue cube on the yellow plate.</figcaption>
     </figure>
-    <!-- TODO: add the instruction-change rollout video -->
-    <div class="vslot solo" data-src="static/videos/instruction_change.mp4">
+    <!-- transparent video: VP9 WebM for Chrome/Edge/Firefox, HEVC for Safari (tools/make_instruction_video.py) -->
+    <!-- schedule rows: [first frame, cube, plate, current operation]; pick -> place at the first lift frame (88) -->
+    <div class="vslot solo alpha" data-src-webm="static/videos/instruction_change.webm" data-src-hevc="static/videos/instruction_change_hevc.mov"
+         data-fps="30" data-schedule='[[0,"red","red","pick"],[15,"red","green","pick"],[30,"blue","green","pick"],[88,"blue","green","place"],[125,"blue","yellow","place"]]'>
       <div class="vbox">
-        <video muted loop playsinline preload="metadata"></video>
-        <div class="ph"><span class="ph-title">Instruction-change video coming soon</span><code class="ph-path"></code></div>
+        <video muted loop playsinline preload="auto" poster="static/images/instruction_change_poster.webp" aria-label="Rollout in which the instruction changes during execution and the robot places the blue cube on the yellow plate"></video>
+        <div class="ph"><span class="ph-title">Instruction-change video</span><code class="ph-path"></code></div>
       </div>
+      <p class="live-instr"><span class="live-label">Instruction</span><span class="live-text"></span></p>
     </div>
   </div>
 

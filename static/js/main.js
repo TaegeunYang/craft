@@ -245,7 +245,66 @@
     video.src = src;
   }
 
-  document.querySelectorAll(".vslot[data-src]").forEach((slot) => loadVideo(slot, slot.dataset.src));
+  // Transparent videos: WebKit (Safari, all iOS browsers) plays HEVC with alpha; others play VP9 WebM with alpha
+  function prefersHevcAlpha() {
+    const ua = navigator.userAgent;
+    const iOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    const safari = /Safari\//.test(ua) && !/Chrome|Chromium|CriOS|Edg|OPR|Firefox|FxiOS|Android/.test(ua);
+    return iOS || safari;
+  }
+
+  document.querySelectorAll(".vslot[data-src], .vslot[data-src-webm]").forEach((slot) => {
+    const d = slot.dataset;
+    loadVideo(slot, d.srcWebm ? (prefersHevcAlpha() ? d.srcHevc : d.srcWebm) : d.src);
+  });
+
+  // ---------------------------------------------------------------
+  // Live instruction under a video: follows the frame, highlights the entity of the current skill
+  // ---------------------------------------------------------------
+  function setupLiveInstruction(slot) {
+    const schedule = JSON.parse(slot.dataset.schedule);
+    const fps = Number(slot.dataset.fps) || 30;
+    const video = slot.querySelector("video");
+    const out = slot.querySelector(".live-text");
+    let cur = -1;
+
+    function chip(color, noun, current, changed, markIn) {
+      const span = document.createElement("span");
+      span.className = "ent" + (current ? (markIn ? " mark-in" : "") : " no-mark") + (changed ? " is-changed" : "");
+      const sw = document.createElement("i");
+      sw.className = `sw ${noun} ${color}`;
+      span.append(sw, `${color} ${noun}`);
+      return span;
+    }
+
+    function render(i) {
+      const [, cube, plate, op] = schedule[i];
+      const prev = i > cur && cur >= 0 ? schedule[cur] : null; // no change effects on loop restart
+      out.replaceChildren(
+        "pick the ", chip(cube, "cube", op === "pick", prev && prev[1] !== cube, prev && prev[3] !== op),
+        " and place it on the ", chip(plate, "plate", op === "place", prev && prev[2] !== plate, prev && prev[3] !== op));
+      cur = i;
+    }
+
+    function update(t) {
+      const frame = Math.floor(t * fps + 1e-3);
+      let i = 0;
+      while (i + 1 < schedule.length && frame >= schedule[i + 1][0]) i++;
+      if (i !== cur) render(i);
+    }
+
+    if ("requestVideoFrameCallback" in HTMLVideoElement.prototype) {
+      const onFrame = (_, meta) => { update(meta.mediaTime); video.requestVideoFrameCallback(onFrame); };
+      video.requestVideoFrameCallback(onFrame);
+    } else {
+      const loop = () => { update(video.currentTime); requestAnimationFrame(loop); };
+      requestAnimationFrame(loop);
+    }
+    video.addEventListener("seeked", () => update(video.currentTime));
+    render(0);
+  }
+
+  document.querySelectorAll(".vslot[data-schedule]").forEach(setupLiveInstruction);
 
   // ---------------------------------------------------------------
   // Top nav: highlight the section in view

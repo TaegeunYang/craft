@@ -3,6 +3,6 @@
   <g transform="translate(32 33) rotate(-38) scale(1.55) translate(-16 -8)">
     <rect x="0.5" y="6.1" width="23" height="3.4" rx="1.7" fill="#dca65c"/>
     <rect x="0.5" y="6.1" width="7.5" height="3.4" rx="1.7" fill="#a56d2e"/>
-    <path d="M22.2 0.8h5.6l.8 2.2v8h1.4v4.2h-10V11h1.4V3z" fill="#eef0f2"/>
+    <path d="M22.3 15.3H26.8V12.4H26.35V11.6H26.8V3.8C26.8 1.6 24.4 0.2 20 0.4C22 1.2 22.3 2.4 22.3 3.8V11.6H22.75V12.4H22.3Z" fill="#eef0f2"/>
   </g>
 </svg>

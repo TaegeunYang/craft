@@ -26,7 +26,7 @@ Drop MP4 files (H.264, muted) at these paths; the page picks them up automatical
 |---|---|
 | Explorer, Pick-Place | `static/videos/explorer/pick_place/{cube}_{plate}_{ft,craft}.mp4` |
 | Explorer, Pick-Place-Press | `static/videos/explorer/pick_place_press/{cube}_{plate}_{button}_{ft,craft}.mp4` |
-| Instruction change | `static/videos/instruction_change.mp4` |
+| Instruction change | `static/videos/instruction_change.webm` + `instruction_change_hevc.mov` (transparent; built by `tools/make_instruction_video.py`) |
 | Real robot | `static/videos/real/{cube}_{plate}_craft.mp4` |
 
 Colors are `red`, `blue`, `green`, `yellow` (Press: `red`, `blue`).
