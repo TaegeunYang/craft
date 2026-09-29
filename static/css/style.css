@@ -84,24 +84,24 @@ p { margin: 0 0 1em; }
   border-bottom: 1px solid var(--line);
 }
 .topnav-inner { max-width: calc(var(--maxw-wide) + 2 * var(--gutter)); margin: 0 auto; padding: 0 var(--gutter); height: 52px; display: flex; align-items: center; gap: 24px; }
-.brand { position: relative; display: inline-flex; align-items: center; padding-left: 17px; line-height: 1; font-weight: 800; letter-spacing: 0.02em; color: var(--ink); text-decoration: none; flex: none; }
+.brand { position: relative; display: inline-flex; align-items: center; padding-left: 13px; line-height: 1; font-weight: 800; letter-spacing: 0.02em; color: var(--ink); text-decoration: none; flex: none; }
 .brand:hover { color: var(--ink); }
 
-/* hammer striking the wordmark: the SVG is drawn in its impact pose, pivoting at the grip */
+/* hammer striking the wordmark: pivots at the grip, which sits beside the C at its mid-height */
 .brand-word { display: inline-block; transform-origin: 50% 100%; }
-.brand-hammer { position: absolute; left: 0; top: -9px; width: 26px; height: 13px; overflow: visible; transform-origin: 6.9% 48.75%; transform: rotate(-22deg); }
-.brand-spark { position: absolute; left: 14px; top: -5px; width: 12px; height: 6px; opacity: 0; }
+.brand-hammer { position: absolute; left: 1.7px; top: 2.2px; width: 26px; height: 13px; overflow: visible; transform-origin: 6.9% 48.75%; transform: rotate(-62deg); }
+.brand-spark { position: absolute; left: 12px; top: -4px; width: 12px; height: 6px; opacity: 0; }
 @media (prefers-reduced-motion: no-preference) {
   .brand-hammer { animation: hammer-strike 1.6s infinite; }
   .brand-word { animation: word-struck 1.6s infinite; }
   .brand-spark { animation: spark 1.6s infinite; }
 }
 @keyframes hammer-strike {
-  0% { transform: rotate(0deg); animation-timing-function: cubic-bezier(0.2, 0.7, 0.3, 1); }
-  42% { transform: rotate(-26deg); animation-timing-function: cubic-bezier(0.6, 0, 1, 0.6); }
-  52% { transform: rotate(2deg); animation-timing-function: ease-out; }
-  58% { transform: rotate(-6deg); animation-timing-function: ease-in; }
-  64%, 100% { transform: rotate(0deg); }
+  0% { transform: rotate(-45deg); animation-timing-function: cubic-bezier(0.2, 0.7, 0.3, 1); }
+  42% { transform: rotate(-71deg); animation-timing-function: cubic-bezier(0.6, 0, 1, 0.6); }
+  52% { transform: rotate(-43deg); animation-timing-function: ease-out; }
+  58% { transform: rotate(-51deg); animation-timing-function: ease-in; }
+  64%, 100% { transform: rotate(-45deg); }
 }
 @keyframes word-struck {
   0%, 51% { transform: none; }
