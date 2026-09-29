@@ -45,4 +45,5 @@ python tools/render_figures.py path/to/Figures
 - [ ] Author homepage links (`index.html` hero)
 - [ ] arXiv link and ID (Paper button, BibTeX)
 - [ ] Code link (Code button)
+- [ ] Remove the `<meta name="robots" content="noindex, nofollow">` tag at the public launch
 - [ ] Rollout videos (table above); set `--video-ratio` in `static/css/style.css` to match them
