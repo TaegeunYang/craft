@@ -7,6 +7,8 @@
   // (paper Figures D.1 and D.2; mean over three evaluation seeds).
   // null marks a demonstrated combination.
   // ---------------------------------------------------------------
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let pairToken = 0; // bumps on every explorer selection so stale video events are ignored
   const COLORS = ["red", "blue", "green", "yellow"];
   const MODELS = { pi05: "π0.5", pi0: "π0", gr00t: "GR00T N1.7" };
   function modelLabel(m) {
@@ -32,10 +34,10 @@
   };
 
   // Video file conventions (see README.md)
-  const videoPath = (sel, method) =>
+  const videoBase = (model, sel, method) =>
     sel.bench === "pp"
-      ? `static/videos/explorer/pick_place/${sel.cube}_${sel.plate}_${method}.mp4`
-      : `static/videos/explorer/pick_place_press/${sel.cube}_${sel.plate}_${sel.button}_${method}.mp4`;
+      ? `static/videos/explorer/${model}/pick_place/${sel.cube}_${sel.plate}_${method}`
+      : `static/videos/explorer/${model}/pick_place_press/${sel.cube}_${sel.plate}_${sel.button}_${method}`;
 
   // ---------------------------------------------------------------
   // Sequential green scale (one hue, light -> dark), as in the paper heatmaps
@@ -90,6 +92,8 @@
     const instrEl = document.getElementById("instr");
     const slotFt = document.getElementById("v-ft");
     const slotCraft = document.getElementById("v-craft");
+    const noteEl = document.getElementById("compare-note");
+    const videoModels = (document.querySelector(".explorer").dataset.videoModels || "").split(/\s+/);
 
     document.querySelector(".scale-bar").style.background =
       `linear-gradient(90deg, ${STOPS.map(([v, c]) => `${rgb(c)} ${v}%`).join(", ")})`;
@@ -224,8 +228,14 @@
       }
       instrEl.append(document.createTextNode("”"));
 
-      loadVideo(slotFt, videoPath(sel, "ft"));
-      loadVideo(slotCraft, videoPath(sel, "craft"));
+      // rollout videos follow the selected model; models without videos show a placeholder
+      if (videoModels.includes(state.model)) {
+        loadPair([slotFt, slotCraft], [videoBase(state.model, sel, "ft"), videoBase(state.model, sel, "craft")]);
+        noteEl.replaceChildren(modelLabel(state.model), " rollouts from the same initial scene.");
+      } else {
+        clearPair([slotFt, slotCraft]);
+        noteEl.replaceChildren(modelLabel(state.model), " rollouts are coming soon.");
+      }
     }
 
     render();
@@ -234,26 +244,68 @@
   // ---------------------------------------------------------------
   // Video slots: show the video when the file exists, a placeholder otherwise
   // ---------------------------------------------------------------
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  function loadVideo(slot, src) {
+  function loadVideo(slot, src, autoplay = true) {
     const video = slot.querySelector("video");
     const path = slot.querySelector(".ph-path");
     if (path) path.textContent = src;
-    slot.classList.remove("has-video");
-    video.onloadeddata = () => {
-      slot.classList.add("has-video");
-      if (reduceMotion) video.controls = true;
-      else video.play().catch(() => {});
+    slot.classList.remove("has-video", "missing");
+    video.onloadeddata = () => slot.classList.add("has-video");
+    video.onerror = () => {
+      slot.classList.remove("has-video");
+      slot.classList.add("missing");
     };
-    video.onerror = () => slot.classList.remove("has-video");
     video.src = src;
+    if (reduceMotion) video.controls = true;
+    else if (autoplay) video.play().catch(() => {});
+  }
+
+  // Explorer: the FT (Full) and CRAFT rollouts of one combination have the same length.
+  // Both start right away, rewind together once both can play through, and restart together.
+  function loadPair(slots, bases) {
+    const token = ++pairToken;
+    const videos = slots.map((s) => s.querySelector("video"));
+    const restart = () => {
+      if (token !== pairToken || reduceMotion) return;
+      videos.forEach((v) => {
+        v.currentTime = 0;
+        v.play().catch(() => {});
+      });
+    };
+    let ready = 0;
+    slots.forEach((slot, i) => {
+      const video = videos[i];
+      video.loop = false;
+      video.poster = `${bases[i]}_poster.webp`;
+      video.onended = () => { if (token === pairToken) restart(); };
+      video.oncanplaythrough = () => {
+        video.oncanplaythrough = null;
+        if (token === pairToken && ++ready === videos.length) restart();
+      };
+      loadVideo(slot, alphaSrc(bases[i]));
+    });
+  }
+
+  function clearPair(slots) {
+    pairToken++; // ignore events from videos that are still loading
+    slots.forEach((slot) => {
+      const video = slot.querySelector("video");
+      video.onloadeddata = video.onerror = video.onended = video.oncanplaythrough = null;
+      video.removeAttribute("src");
+      video.removeAttribute("poster");
+      video.load();
+      slot.classList.remove("has-video");
+      slot.classList.add("missing");
+    });
+  }
+
+  function alphaSrc(base) {
+    return prefersHevcAlpha() ? `${base}_hevc.mov` : `${base}.webm`;
   }
 
   // Transparent videos: WebKit (Safari, all iOS browsers) plays HEVC with alpha; others play VP9 WebM with alpha
   function prefersHevcAlpha() {
     const ua = navigator.userAgent;
-    const iOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    const iOS = /iPad|iPhone|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1 && !/Chrome|Android/.test(ua));
     const safari = /Safari\//.test(ua) && !/Chrome|Chromium|CriOS|Edg|OPR|Firefox|FxiOS|Android/.test(ua);
     return iOS || safari;
   }
