@@ -51,7 +51,8 @@ python tools/render_figures.py path/to/Figures
 
 - [x] Co-author names
 - [x] Author homepage links
-- [ ] arXiv link (Paper button) and the BibTeX entry (the section shows TBD for now; restore the Copy button with it, see the comment in `index.html`)
+- [x] Paper PDF (`static/paper.pdf`, linked from the Paper button; replace the file when the paper is revised)
+- [ ] arXiv link (add a button once announced) and the BibTeX entry (the section shows TBD for now; restore the Copy button with it, see the comment in `index.html`)
 - [ ] Code link (Code button)
 - [ ] Remove the `<meta name="robots" content="noindex, nofollow">` tag at the public launch
 - [ ] Explorer rollout videos (table above); set `--video-ratio` in `static/css/style.css` to match them
