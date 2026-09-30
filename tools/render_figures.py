@@ -26,7 +26,6 @@ FIGURES = {
     "real_robot": ("figure6_final_comp.pdf", 0, 2400),
     "vision_shortcut": ("Appendix/vision_shortcut_comp.pdf", 0, 1400),
     "empty_instruction": ("Appendix/empty_instruction_comp.pdf", 0, 1400),
-    "action_predictions": ("Appendix/fix_scene_diff_inst_comp.pdf", 0, 1400),
     "skill_reuse": ("Appendix/skill_kv_swap_comp.pdf", 0, 1400),
 }
 

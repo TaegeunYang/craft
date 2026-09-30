@@ -18,6 +18,10 @@ Then open http://localhost:8765.
 3. Settings → Pages → Source: *Deploy from a branch*, Branch: `main` / `(root)`.
 4. The page is served at `https://taegeunyang.github.io/craft/`.
 
+## Cache busting
+
+`index.html` loads `style.css?v=…` and `main.js?v=…`. Bump the `v` value whenever either file changes so visitors never mix a new page with old CSS/JS.
+
 ## Videos
 
 Drop MP4 files (H.264, muted) at these paths; the page picks them up automatically and shows a placeholder until then.
@@ -42,7 +46,7 @@ python tools/render_figures.py path/to/Figures
 ## TODO
 
 - [x] Co-author names
-- [ ] Author homepage links (`index.html` hero)
+- [x] Author homepage links
 - [ ] arXiv link and ID (Paper button, BibTeX)
 - [ ] Code link (Code button)
 - [ ] Remove the `<meta name="robots" content="noindex, nofollow">` tag at the public launch

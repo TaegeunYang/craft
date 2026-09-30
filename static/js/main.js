@@ -138,36 +138,41 @@
       return el;
     }
 
+    // One grid per matrix: [axis-y | row heads | cells] x [title | axis-x | column heads | rows],
+    // so the axis titles are centered on the cells themselves.
     function buildMatrix(bench, colors, button) {
+      const n = colors.length;
       const mx = document.createElement("div");
       mx.className = "mx";
+      mx.style.setProperty("--n", n);
+      const place = (el, col, row, colSpan = 1, rowSpan = 1) => {
+        el.style.gridColumn = `${col} / span ${colSpan}`;
+        el.style.gridRow = `${row} / span ${rowSpan}`;
+        mx.append(el);
+      };
+      let row = 1;
       if (button) {
         const t = document.createElement("div");
         t.className = "mx-title";
         const sw = document.createElement("i");
         sw.className = `sw button ${button}`;
         t.append(sw, document.createTextNode(`Press: ${button} button`));
-        mx.append(t);
+        place(t, 3, row++, n);
       }
       const ax = document.createElement("div");
       ax.className = "mx-axis-x";
       ax.textContent = "Place: plate";
-      const frame = document.createElement("div");
-      frame.className = "mx-frame";
+      place(ax, 3, row++, n);
+      colors.forEach((c, j) => place(head("mx-colhead", c, "plate"), 3 + j, row));
+      row++;
       const ay = document.createElement("div");
       ay.className = "mx-axis-y";
       ay.textContent = "Pick: cube";
-      const grid = document.createElement("div");
-      grid.className = "mx-grid";
-      grid.style.setProperty("--n", colors.length);
-      grid.append(document.createElement("div"));
-      colors.forEach((c) => grid.append(head("mx-colhead", c, "plate")));
-      colors.forEach((cube) => {
-        grid.append(head("mx-rowhead", cube, "cube"));
-        colors.forEach((plate) => grid.append(makeCell(bench, { bench, cube, plate, button })));
+      place(ay, 1, row, 1, n);
+      colors.forEach((cube, i) => {
+        place(head("mx-rowhead", cube, "cube"), 2, row + i);
+        colors.forEach((plate, j) => place(makeCell(bench, { bench, cube, plate, button }), 3 + j, row + i));
       });
-      frame.append(ay, grid);
-      mx.append(ax, frame);
       return mx;
     }
 

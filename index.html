@@ -17,7 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="static/images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="stylesheet" href="static/css/style.css?v=20260930e">
   <!-- No analytics, cookies, or third-party requests on this page. -->
 </head>
 <body>
@@ -55,12 +55,11 @@
       <span class="title-sub">Skill Alignment for Compositional Generalization in VLAs</span>
     </h1>
 
-    <!-- TODO: wrap each name in <a href="..."> once homepage links are ready -->
     <p class="authors">
-      <span class="author">Taegeun Yang</span><span class="sep">,</span>
-      <span class="author">Youngju Na</span><span class="sep">,</span>
-      <span class="author">Yoonki Cho</span><span class="sep">,</span>
-      <span class="author">Sung-Eui Yoon</span>
+      <a href="https://taegeunyang.github.io/">Taegeun Yang</a><span class="sep">,</span>
+      <a href="https://youngju-na.github.io/">Youngju Na</a><span class="sep">,</span>
+      <a href="https://yoonkicho.github.io/">Yoonki Cho</a><span class="sep">,</span>
+      <a href="https://sgvr.kaist.ac.kr/~sungeui/">Sung-Eui Yoon</a>
     </p>
     <p class="affil">KAIST</p>
 
@@ -82,38 +81,22 @@
     </div>
   </div>
 
-  <div class="container wide">
+  <div class="container">
     <figure class="fig teaser">
       <!-- TODO (optional): swap for a teaser video at static/videos/teaser.mp4 -->
       <img src="static/images/teaser.webp" width="2400" height="761" alt="Demonstrations cover yellow-to-yellow and green-to-green. For the undemonstrated instruction, pick the yellow cube and place it on the green plate, standard fine-tuning fails due to a vision shortcut while CRAFT succeeds. A bar chart compares undemonstrated-combination success of the best standard fine-tuning and CRAFT across three VLAs and two benchmarks.">
-      <figcaption>Fine-tuned VLAs struggle to execute new combinations of demonstrated skills. CRAFT uses demonstrated skill executions to train the policy to follow instructions for new combinations, improving success on undemonstrated combinations across two benchmarks and three VLA models over standard fine-tuning.</figcaption>
+      <figcaption><span class="cl"><span class="nw">Fine-tuned</span> VLAs struggle to execute new combinations of demonstrated skills.</span><span class="cl">CRAFT uses demonstrated skill executions to train the policy to follow instructions for new combinations,</span><span class="cl">improving success on undemonstrated combinations across two benchmarks and three VLA models over standard <span class="nw">fine-tuning</span>.</span></figcaption>
     </figure>
   </div>
 
-  <div class="container">
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-value">84.2%</div>
-        <div class="stat-label">undemonstrated success on Pick-Place with π<sub>0.5</sub> — best standard fine-tuning reaches 46.3%</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value">≥ +30.8 pp</div>
-        <div class="stat-label">gain over the best standard fine-tuning for every model and benchmark (up to +69.5 pp)</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value">43 / 60</div>
-        <div class="stat-label">real-robot trials on undemonstrated combinations — 9 / 60 with standard fine-tuning</div>
-      </div>
-    </div>
-  </div>
 </header>
 
 <main>
 
 <section class="section" id="abstract">
-  <div class="container narrow">
+  <div class="container">
     <h2>Abstract</h2>
-    <p>Vision-language-action (VLA) models often struggle to generalize to skill combinations absent from their fine-tuning demonstrations, even when every constituent skill has been demonstrated. We focus on a <em>vision shortcut</em> as one failure mode: during fine-tuning, visual observations can serve as a proxy for the instruction, so a policy may execute a demonstrated combination associated with similar observations rather than the instructed combination. This motivates training with counterfactual pairs that hold a demonstration observation fixed while changing the instruction to specify an undemonstrated combination. These pairs, however, lack demonstrated actions for supervision. Crucially, the currently required skill has already been demonstrated, but actions from those executions cannot be transferred directly because the same skill can require different actions across observations. We propose <strong>CRAFT</strong>, which transfers supervision from demonstrated executions of the required skill to counterfactual pairs through reusable skill representations. Across three VLA models and two simulation benchmarks, CRAFT improves success on undemonstrated combinations while maintaining high success on demonstrated ones. CRAFT also improves compositional generalization on a real robot.</p>
+    <p><span class="nw">Vision-language-action</span> (VLA) models often struggle to generalize to skill combinations absent from their <span class="nw">fine-tuning</span> demonstrations, even when every constituent skill has been demonstrated. We focus on a <em>vision shortcut</em> as one failure mode: during <span class="nw">fine-tuning</span>, visual observations can serve as a proxy for the instruction, so a policy may execute a demonstrated combination associated with similar observations rather than the instructed combination. This motivates training with counterfactual pairs that hold a demonstration observation fixed while changing the instruction to specify an undemonstrated combination. These pairs, however, lack demonstrated actions for supervision. Crucially, the currently required skill has already been demonstrated, but actions from those executions cannot be transferred directly because the same skill can require different actions across observations. We propose <strong>CRAFT</strong>, which transfers supervision from demonstrated executions of the required skill to counterfactual pairs through reusable skill representations. Across three VLA models and two simulation benchmarks, CRAFT improves success on undemonstrated combinations while maintaining high success on demonstrated ones. CRAFT also improves compositional generalization on a real robot.</p>
   </div>
 </section>
 
@@ -121,13 +104,13 @@
   <div class="container">
     <p class="eyebrow">Interactive</p>
     <h2>Same scene, different task</h2>
-    <p class="lede">Demonstrations cover every constituent skill but only same-color combinations. Pick a combination to compare standard fine-tuning, FT (Full), with CRAFT. Cells show CRAFT’s success rate on each undemonstrated combination.</p>
+    <p class="lede">Demonstrations cover every constituent skill but only <span class="nw">same-color</span> combinations. Pick a combination to compare standard <span class="nw">fine-tuning</span>, FT (Full), with CRAFT. Cells show CRAFT’s success rate on each undemonstrated combination.</p>
 
     <div class="explorer card">
       <div class="explorer-controls">
         <div class="seg" role="group" aria-label="Benchmark">
-          <button type="button" data-bench="pp" aria-pressed="true">Pick-Place</button>
-          <button type="button" data-bench="ppp" aria-pressed="false">Pick-Place-Press</button>
+          <button type="button" data-bench="pp" aria-pressed="true"><span class="nw">Pick-Place</span></button>
+          <button type="button" data-bench="ppp" aria-pressed="false"><span class="nw">Pick-Place-Press</span></button>
         </div>
         <div class="seg-wrap">
           <span class="seg-label">CRAFT success for</span>
@@ -183,15 +166,15 @@
 <section class="section" id="problem">
   <div class="container">
     <p class="eyebrow">Motivation</p>
-    <h2>Fine-tuned VLAs struggle with new skill combinations</h2>
+    <h2><span class="nw">Fine-tuned</span> VLAs struggle with new skill combinations</h2>
 
-    <div class="split aside-wide">
+    <div class="split tuned" style="--tw: 55.0000%">
       <div class="split-text">
-        <p>LIBERO-Goal contains six pick-and-place tasks, each pairing an object with a target. These tasks define the demonstrated combinations (✓). From the same objects and targets, we construct five undemonstrated combinations (○) for evaluation. Every constituent pick and place skill appears in at least one demonstrated task; only the combination is new.</p>
+        <p><span class="nw">LIBERO-Goal</span> contains six <span class="nw">pick-and-place</span> tasks, each pairing an object with a target. These tasks define the demonstrated combinations (✓). From the same objects and targets, we construct five undemonstrated combinations (○) for evaluation. Every constituent pick and place skill appears in at least one demonstrated task; only the combination is new.</p>
         <p>For example, “put the wine bottle on the stove” combines picking the wine bottle (tasks 1 and 4) with placing on the stove (task 6). The highlighted cells mark this example below.</p>
       </div>
       <div class="split-aside">
-        <p class="table-cap">Object–target combinations in LIBERO-Goal</p>
+        <p class="table-cap"><span class="nw">Object–target</span> combinations in <span class="nw">LIBERO-Goal</span></p>
         <div class="matrix-wrap">
           <table class="combo-matrix">
             <thead>
@@ -208,13 +191,13 @@
       </div>
     </div>
 
-    <div class="split">
+    <div class="split tuned" style="--tw: 43.2692%">
       <div class="split-text">
-        <p>We evaluate publicly released LIBERO-Goal checkpoints of four VLAs without further training. Success is 88.8–97.4% on the demonstrated combinations but only 2.0–50.9% on the undemonstrated ones.</p>
-        <p>When a rollout completes a task other than the instructed one, it is almost always a demonstrated task that shares the object or the target with the instruction. This behavior is consistent with a <strong>vision shortcut</strong>: during fine-tuning, the visual observation can serve as a proxy for the instruction.</p>
+        <p>We evaluate publicly released <span class="nw">LIBERO-Goal</span> checkpoints of four VLAs without further training. Success is <span class="nw">88.8–97.4%</span> on the demonstrated combinations but only <span class="nw">2.0–50.9%</span> on the undemonstrated ones.</p>
+        <p>When a rollout completes a task other than the instructed one, it is almost always a demonstrated task that shares the object or the target with the instruction. This behavior is consistent with a <strong>vision shortcut</strong>: during <span class="nw">fine-tuning</span>, the visual observation can serve as a proxy for the instruction.</p>
       </div>
       <div class="split-aside">
-        <p class="table-cap">LIBERO-Goal success (%), mean ± std over three seeds</p>
+        <p class="table-cap"><span class="nw">LIBERO-Goal</span> success (%), mean ± std over three seeds</p>
         <div class="table-wrap">
           <table class="data compact">
             <thead>
@@ -251,20 +234,20 @@
         </figcaption>
       </figure>
     </div>
-    <p class="fig-note">Rollouts of the released π<sub>0.5</sub> LIBERO-Goal checkpoint. Task indices follow the ten original LIBERO-Goal tasks.</p>
+    <p class="fig-note"><span class="cl">Rollouts of the released π<sub>0.5</sub> <span class="nw">LIBERO-Goal</span> checkpoint.</span><span class="cl">Task indices follow the ten original <span class="nw">LIBERO-Goal</span> tasks.</span></p>
   </div>
 </section>
 
 <section class="section alt" id="method">
   <div class="container">
     <p class="eyebrow">Method</p>
-    <h2>CRAFT: Counterfactual Skill-Representation Alignment for Fine-Tuning</h2>
+    <h2>CRAFT: Counterfactual <span class="nw">Skill-Representation</span> Alignment for <span class="nw">Fine-Tuning</span></h2>
     <p class="lede">We form counterfactual pairs by holding a demonstration observation fixed and changing the instruction to specify an undemonstrated combination. A pair has no demonstrated action, but the skill it currently requires has been demonstrated elsewhere. Because the same skill can require different actions under different observations, CRAFT does not copy those actions: it transfers supervision through reusable skill representations.</p>
   </div>
-  <div class="container wide">
+  <div class="container">
     <figure class="fig">
       <img src="static/images/overview.webp" width="2400" height="1032" loading="lazy" alt="Overview of CRAFT. Left: skill and state representation learning with a contrastive objective across executions of the same skill. Right: counterfactual skill representation alignment, where a counterfactual pair's skill representation is combined with the state representation of a demonstrated execution and supervised by its target velocity.">
-      <figcaption>Overview of CRAFT. Yellow instruction highlights mark the currently required skill. (1) Skill representations are encouraged to be reusable across executions by contrasting prediction errors while holding the state and target velocity fixed. (2) The counterfactual skill representation is combined with a state representation from a demonstration of the required skill, whose target velocity supervises the prediction.</figcaption>
+      <figcaption><span class="cl">Overview of CRAFT. Yellow instruction highlights mark the currently required skill.</span><span class="cl">(1) Skill representations are encouraged to be reusable across executions</span><span class="cl">by contrasting prediction errors while holding the state and target velocity fixed.</span><span class="cl">(2) The counterfactual skill representation is combined with a state representation</span><span class="cl">from a demonstration of the required skill, whose target velocity supervises the prediction.</span></figcaption>
     </figure>
   </div>
   <div class="container">
@@ -293,12 +276,12 @@
   <div class="container">
     <p class="eyebrow">Benchmarks</p>
     <h2>Two compositional benchmarks</h2>
-    <p class="lede">Built on LIBERO. In both, demonstrations cover every constituent skill but only same-color combinations; the remaining combinations are evaluated. We collect 50 demonstrations per demonstrated combination and will release both benchmarks and their demonstration datasets.</p>
+    <p class="lede">Both benchmarks are built on LIBERO. In each, demonstrations cover every constituent skill but only the <span class="nw">same-color</span> combinations, and every other combination is held out for evaluation. We collect 50 demonstrations per demonstrated combination and will release both benchmarks and their demonstration datasets.</p>
   </div>
-  <div class="container wide">
+  <div class="container">
     <figure class="fig">
       <img src="static/images/benchmarks.webp" width="2400" height="670" loading="lazy" alt="Pick-Place has 4 demonstrated and 12 undemonstrated combinations of cube and plate colors; Pick-Place-Press has 2 demonstrated and 6 undemonstrated combinations of cube, plate, and button colors.">
-      <figcaption><strong>Pick-Place</strong>: pick one of four colored cubes and place it on one of four colored plates — 4 demonstrated, 12 undemonstrated combinations. <strong>Pick-Place-Press</strong> adds pressing a button — 2 demonstrated, 6 undemonstrated combinations.</figcaption>
+      <figcaption><span class="cl"><strong><span class="nw">Pick-Place</span></strong>: pick one of four colored cubes and place it on one of four colored plates.</span><span class="cl">4 demonstrated and 12 undemonstrated combinations.</span><span class="cl"><strong><span class="nw">Pick-Place-Press</span></strong>: pick, place, and press, with red and blue cubes, plates, and buttons.</span><span class="cl">2 demonstrated and 6 undemonstrated combinations.</span></figcaption>
     </figure>
   </div>
 </section>
@@ -307,7 +290,7 @@
   <div class="container">
     <p class="eyebrow">Results</p>
     <h2>Generalizing to undemonstrated combinations</h2>
-    <p class="lede">Standard fine-tuning reaches high success on demonstrated combinations but much lower success on undemonstrated ones, whether the VLM is fully fine-tuned, adapted with LoRA, or frozen. CRAFT achieves the highest undemonstrated success across all three VLAs and both benchmarks while maintaining high success on demonstrated combinations.</p>
+    <p class="lede">Standard <span class="nw">fine-tuning</span> reaches high success on demonstrated combinations but much lower success on undemonstrated ones, whether the VLM is fully <span class="nw">fine-tuned</span>, adapted with LoRA, or frozen. CRAFT achieves the highest undemonstrated success across all three VLAs and both benchmarks while maintaining high success on demonstrated combinations.</p>
 
     <p class="table-cap">Success rates (%) on demonstrated (Demo.) and undemonstrated (Undem.) combinations; mean ± std over three evaluation seeds.</p>
     <div class="table-wrap">
@@ -317,18 +300,18 @@
           <tr><th>Demo.</th><th class="emph">Undem.</th><th>Demo.</th><th class="emph">Undem.</th><th>Demo.</th><th class="emph">Undem.</th></tr>
         </thead>
         <tbody>
-          <tr class="group"><th colspan="7" scope="colgroup">Pick-Place</th></tr>
+          <tr class="group"><th colspan="7" scope="colgroup"><span class="nw">Pick-Place</span></th></tr>
           <tr><td class="left">FT (Full)</td><td>100<span class="sd">±0</span></td><td class="emph">8.4<span class="sd">±0.3</span></td><td>100<span class="sd">±0</span></td><td class="emph">2.8<span class="sd">±0.2</span></td><td>98.8<span class="sd">±0.3</span></td><td class="emph">1.1<span class="sd">±0.1</span></td></tr>
           <tr><td class="left">FT (LoRA)</td><td>100<span class="sd">±0</span></td><td class="emph">46.3<span class="sd">±0.9</span></td><td>97.5<span class="sd">±0</span></td><td class="emph">1.0<span class="sd">±0.2</span></td><td>97.8<span class="sd">±0.6</span></td><td class="emph">2.6<span class="sd">±0.3</span></td></tr>
           <tr><td class="left">FT (Frozen)</td><td>99.0<span class="sd">±0</span></td><td class="emph">21.1<span class="sd">±0.2</span></td><td>48.2<span class="sd">±1.4</span></td><td class="emph">3.0<span class="sd">±0.5</span></td><td>92.3<span class="sd">±1.3</span></td><td class="emph">2.2<span class="sd">±0.1</span></td></tr>
-          <tr><td class="left">CAG-VA</td><td>96.3<span class="sd">±1.5</span></td><td class="emph">66.5<span class="sd">±0.5</span></td><td>50.5<span class="sd">±1.3</span></td><td class="emph">6.8<span class="sd">±0.6</span></td><td>88.7<span class="sd">±1.3</span></td><td class="emph">4.9<span class="sd">±0.5</span></td></tr>
+          <tr><td class="left"><span class="nw">CAG-VA</span></td><td>96.3<span class="sd">±1.5</span></td><td class="emph">66.5<span class="sd">±0.5</span></td><td>50.5<span class="sd">±1.3</span></td><td class="emph">6.8<span class="sd">±0.6</span></td><td>88.7<span class="sd">±1.3</span></td><td class="emph">4.9<span class="sd">±0.5</span></td></tr>
           <tr><td class="left">Skill Composition</td><td>100<span class="sd">±0</span></td><td class="emph">25.7<span class="sd">±0.4</span></td><td>99.5<span class="sd">±0.0</span></td><td class="emph">12.7<span class="sd">±0.4</span></td><td>99.7<span class="sd">±0.6</span></td><td class="emph">13.1<span class="sd">±0.7</span></td></tr>
           <tr class="ours"><td class="left">CRAFT (ours)</td><td>99.0<span class="sd">±0.9</span></td><td class="emph">84.2<span class="sd">±0.3</span></td><td>94.0<span class="sd">±0.9</span></td><td class="emph">64.3<span class="sd">±0.5</span></td><td>99.0<span class="sd">±0.5</span></td><td class="emph">72.1<span class="sd">±0.9</span></td></tr>
-          <tr class="group"><th colspan="7" scope="colgroup">Pick-Place-Press</th></tr>
+          <tr class="group"><th colspan="7" scope="colgroup"><span class="nw">Pick-Place-Press</span></th></tr>
           <tr><td class="left">FT (Full)</td><td>100<span class="sd">±0</span></td><td class="emph">0.7<span class="sd">±0.0</span></td><td>99.7<span class="sd">±0.6</span></td><td class="emph">0.3<span class="sd">±0.0</span></td><td>97.7<span class="sd">±2.3</span></td><td class="emph">1.1<span class="sd">±0.2</span></td></tr>
           <tr><td class="left">FT (LoRA)</td><td>100<span class="sd">±0</span></td><td class="emph">15.4<span class="sd">±0.8</span></td><td>99.3<span class="sd">±0.6</span></td><td class="emph">0.7<span class="sd">±0.0</span></td><td>99.3<span class="sd">±1.2</span></td><td class="emph">1.0<span class="sd">±0</span></td></tr>
           <tr><td class="left">FT (Frozen)</td><td>98.0<span class="sd">±1.0</span></td><td class="emph">0.9<span class="sd">±0.2</span></td><td>82.0<span class="sd">±3.5</span></td><td class="emph">1.5<span class="sd">±0.4</span></td><td>97.7<span class="sd">±0.6</span></td><td class="emph">1.1<span class="sd">±0.2</span></td></tr>
-          <tr><td class="left">CAG-VA</td><td>92.7<span class="sd">±3.5</span></td><td class="emph">21.8<span class="sd">±1.9</span></td><td>69.0<span class="sd">±2.6</span></td><td class="emph">1.1<span class="sd">±0.2</span></td><td>88.7<span class="sd">±2.5</span></td><td class="emph">2.1<span class="sd">±0.2</span></td></tr>
+          <tr><td class="left"><span class="nw">CAG-VA</span></td><td>92.7<span class="sd">±3.5</span></td><td class="emph">21.8<span class="sd">±1.9</span></td><td>69.0<span class="sd">±2.6</span></td><td class="emph">1.1<span class="sd">±0.2</span></td><td>88.7<span class="sd">±2.5</span></td><td class="emph">2.1<span class="sd">±0.2</span></td></tr>
           <tr><td class="left">Skill Composition</td><td>99.7<span class="sd">±0.6</span></td><td class="emph">5.8<span class="sd">±0.2</span></td><td>99.3<span class="sd">±0.6</span></td><td class="emph">0.3<span class="sd">±0.0</span></td><td>99.3<span class="sd">±0.6</span></td><td class="emph">2.0<span class="sd">±0.0</span></td></tr>
           <tr class="ours"><td class="left">CRAFT (ours)</td><td>99.7<span class="sd">±0.6</span></td><td class="emph">62.6<span class="sd">±3.9</span></td><td>95.3<span class="sd">±0.6</span></td><td class="emph">40.7<span class="sd">±1.5</span></td><td>99.3<span class="sd">±0.6</span></td><td class="emph">31.9<span class="sd">±1.1</span></td></tr>
         </tbody>
@@ -336,8 +319,8 @@
     </div>
     <ul class="notes">
       <li><strong>FT (Full / LoRA / Frozen)</strong> differ in how the VLM is adapted; the action expert is fully trained in all cases. CRAFT uses the Full setting.</li>
-      <li><strong>CAG-VA</strong> mitigates vision shortcuts at inference; its guidance strength is tuned for each model and benchmark.</li>
-      <li><strong>Skill Composition</strong> fine-tunes on constituent skill segments and executes the required skills sequentially at deployment.</li>
+      <li><strong><span class="nw">CAG-VA</span></strong> mitigates vision shortcuts at inference; its guidance strength is tuned for each model and benchmark.</li>
+      <li><strong>Skill Composition</strong> <span class="nw">fine-tunes</span> on constituent skill segments and executes the required skills sequentially at deployment.</li>
     </ul>
   </div>
 </section>
@@ -352,10 +335,10 @@
       <p class="block-text">When an instruction change leaves the currently required skill unchanged, the policy keeps executing that skill. When the required skill changes, it begins executing the newly required skill, even from a state reached while executing a different one.</p>
     </div>
   </div>
-  <div class="container wide">
+  <div class="container">
     <figure class="fig">
       <img src="static/images/instruction_change.webp" width="2400" height="594" loading="lazy" alt="Six frames of a rollout where the instruction changes during execution: the robot keeps approaching the red cube when only the placement target changes, redirects to the blue cube when the picking target changes, and changes its destination during placing to the yellow plate.">
-      <figcaption>The robot keeps approaching the red cube when only the future placement target changes (1→2→3), redirects when the picking target changes (3→4), then changes its destination during placement (5→6), placing the blue cube on the yellow plate.</figcaption>
+      <figcaption><span class="cl">The robot keeps approaching the red cube when only the future placement target changes (1→2→3).</span><span class="cl">It redirects its approach when the picking target changes (3→4),</span><span class="cl">then changes its destination during placement (5→6), placing the blue cube on the yellow plate.</span></figcaption>
     </figure>
     <!-- transparent video: VP9 WebM for Chrome/Edge/Firefox, HEVC for Safari (tools/make_instruction_video.py) -->
     <!-- schedule rows: [first frame, cube, plate, current operation]; pick -> place at the first lift frame (88) -->
@@ -363,50 +346,92 @@
          data-fps="30" data-schedule='[[0,"red","red","pick"],[15,"red","green","pick"],[30,"blue","green","pick"],[88,"blue","green","place"],[125,"blue","yellow","place"]]'>
       <div class="vbox">
         <video muted loop playsinline preload="auto" poster="static/images/instruction_change_poster.webp" aria-label="Rollout in which the instruction changes during execution and the robot places the blue cube on the yellow plate"></video>
-        <div class="ph"><span class="ph-title">Instruction-change video</span><code class="ph-path"></code></div>
+        <div class="ph"><span class="ph-title"><span class="nw">Instruction-change</span> video</span><code class="ph-path"></code></div>
       </div>
       <p class="live-instr"><span class="live-label">Instruction</span><span class="live-text"></span></p>
     </div>
   </div>
 
   <div class="container">
-    <div class="block split">
+    <div class="block split tuned" style="--tw: 47.5000%">
       <div class="split-text">
         <h3>Its action predictions follow the instruction</h3>
-        <p class="block-text">Holding the visual observation fixed and varying only the instructed cube or plate, CRAFT’s predicted trajectories separate according to the instructed entity. Predictions from FT (Full) largely overlap across instructions.</p>
+        <p class="block-text">We hold the visual observation fixed and vary only the instructed cube or plate. CRAFT’s predicted trajectories separate according to the instructed entity, while predictions from FT (Full) largely overlap across instructions.</p>
       </div>
-      <figure class="fig split-aside">
-        <img src="static/images/action_predictions.webp" width="1400" height="1236" loading="lazy" alt="Predicted action chunks under a fixed observation for four instructed cube colors and four instructed plate colors, for FT Full and CRAFT. CRAFT's trajectories separate by color; FT's overlap.">
-        <figcaption>Predicted action chunks for 30 random seeds; trajectory colors indicate the instructed entity (π<sub>0.5</sub>, Pick-Place).</figcaption>
-      </figure>
+      <!-- panels from paper Fig. D.3 without text, wall removed (tools/make_action_panels.py) -->
+      <div class="pred split-aside">
+        <div class="pred-row">
+          <p class="pred-head"><span class="pred-tag">Picking</span>Fixed observation: picking the <span class="ent-s"><i class="sw cube blue"></i>blue cube</span><span class="pred-instr">“pick the <span class="ent-s"><i class="sw cube red"></i>red</span><span class="sep">/</span><span class="ent-s"><i class="sw cube blue"></i>blue</span><span class="sep">/</span><span class="ent-s"><i class="sw cube green"></i>green</span><span class="sep">/</span><span class="ent-s"><i class="sw cube yellow"></i>yellow</span> cube”</span></p>
+          <div class="pred-pair">
+            <figure class="pred-panel">
+              <figcaption class="vlabel is-ft">FT (Full)</figcaption>
+              <div class="pred-img">
+                <img src="static/images/pred_ft_pick.webp" width="751" height="561" loading="lazy" alt="FT (Full): the predicted action chunks for all four instructed cubes overlap, heading to the blue cube.">
+                <span class="zoom-box" style="left: 39.55%; top: 28.52%; width: 21.30%; height: 21.39%"></span>
+                <span class="zoom-inset left" style="background-image: url(static/images/pred_ft_pick.webp); background-size: 469.37% auto; background-position: 50.25% 36.28%" aria-hidden="true"></span>
+              </div>
+            </figure>
+            <figure class="pred-panel">
+              <figcaption class="vlabel is-craft">CRAFT (ours)</figcaption>
+              <div class="pred-img">
+                <img src="static/images/pred_craft_pick.webp" width="751" height="561" loading="lazy" alt="CRAFT: the predicted action chunks separate toward the red, blue, green, and yellow cubes.">
+                <span class="zoom-box" style="left: 39.55%; top: 28.52%; width: 21.30%; height: 21.39%"></span>
+                <span class="zoom-inset left" style="background-image: url(static/images/pred_craft_pick.webp); background-size: 469.37% auto; background-position: 50.25% 36.28%" aria-hidden="true"></span>
+              </div>
+            </figure>
+          </div>
+        </div>
+        <div class="pred-row">
+          <p class="pred-head"><span class="pred-tag">Placing</span>Fixed observation: placing on the <span class="ent-s"><i class="sw plate red"></i>red plate</span><span class="pred-instr">“place it on the <span class="ent-s"><i class="sw plate red"></i>red</span><span class="sep">/</span><span class="ent-s"><i class="sw plate blue"></i>blue</span><span class="sep">/</span><span class="ent-s"><i class="sw plate green"></i>green</span><span class="sep">/</span><span class="ent-s"><i class="sw plate yellow"></i>yellow</span> plate”</span></p>
+          <div class="pred-pair">
+            <figure class="pred-panel">
+              <figcaption class="vlabel is-ft">FT (Full)</figcaption>
+              <div class="pred-img">
+                <img src="static/images/pred_ft_place.webp" width="751" height="561" loading="lazy" alt="FT (Full): the predicted action chunks for all four instructed plates overlap near the held red cube.">
+                <span class="zoom-box" style="left: 21.30%; top: 27.27%; width: 19.71%; height: 19.79%"></span>
+                <span class="zoom-inset right" style="background-image: url(static/images/pred_ft_place.webp); background-size: 507.43% auto; background-position: 26.53% 34.00%" aria-hidden="true"></span>
+              </div>
+            </figure>
+            <figure class="pred-panel">
+              <figcaption class="vlabel is-craft">CRAFT (ours)</figcaption>
+              <div class="pred-img">
+                <img src="static/images/pred_craft_place.webp" width="751" height="561" loading="lazy" alt="CRAFT: the predicted action chunks fan out toward the red, blue, green, and yellow plates.">
+                <span class="zoom-box" style="left: 21.30%; top: 27.27%; width: 19.71%; height: 19.79%"></span>
+                <span class="zoom-inset right" style="background-image: url(static/images/pred_craft_place.webp); background-size: 507.43% auto; background-position: 26.53% 34.00%" aria-hidden="true"></span>
+              </div>
+            </figure>
+          </div>
+        </div>
+        <p class="pred-legend"><span class="cl">Line color = instructed entity · 30 random seeds (π<sub>0.5</sub>, <span class="nw">Pick-Place</span>)</span><span class="cl">Insets magnify the dashed region.</span></p>
+      </div>
     </div>
 
-    <div class="block split reverse">
+    <div class="block split reverse tuned" style="--tw: 40.7692%">
       <div class="split-text">
         <h3>Skill representations are organized by skill</h3>
-        <p class="block-text">Without <span class="math">ℒ<sub>skill</sub></span>, representations from different entities are mixed within the pick and place groups. With <span class="math">ℒ<sub>skill</sub></span>, they form entity-specific groups within each operation.</p>
+        <p class="block-text">Without <span class="math">ℒ<sub>skill</sub></span>, representations from different entities are mixed within the pick and place groups. With <span class="math">ℒ<sub>skill</sub></span>, they form <span class="nw">entity-specific</span> groups within each operation.</p>
       </div>
       <figure class="fig split-aside">
         <img src="static/images/tsne.webp" width="1400" height="756" loading="lazy" alt="t-SNE projections of skill representations without and with the skill objective. With it, points form entity-specific clusters within the pick and place groups.">
-        <figcaption>t-SNE of skill representations on Pick-Place, colored by the entity of the currently required skill.</figcaption>
+        <figcaption><span class="cl"><span class="nw">t-SNE</span> of skill representations on <span class="nw">Pick-Place</span>,</span><span class="cl">colored by the entity of the currently required skill.</span></figcaption>
       </figure>
     </div>
 
-    <div class="block split">
+    <div class="block split tuned" style="--tw: 47.5000%">
       <div class="split-text">
         <h3>…and reusable across executions</h3>
         <p class="block-text">Replacing a recipient’s skill representation with one from another execution of the same skill changes the predicted action chunk by only <strong>4.0 ± 3.1%</strong> on average. Substitutions from different skills produce substantially larger changes.</p>
       </div>
       <figure class="fig split-aside">
         <img src="static/images/skill_reuse.webp" width="1400" height="675" loading="lazy" alt="Heatmaps of relative action change when substituting skill representations between recipient and donor targets for picking and placing. Diagonal same-skill substitutions change the prediction by 3 to 5 percent; off-diagonal substitutions by 50 to 101 percent.">
-        <figcaption>Relative change in the predicted action chunk after substituting skill representations (π<sub>0.5</sub>, Pick-Place). Outlined diagonal cells use same-skill donors.</figcaption>
+        <figcaption><span class="cl">Relative change in the predicted action chunk</span><span class="cl">after substituting skill representations (π<sub>0.5</sub>, <span class="nw">Pick-Place</span>).</span><span class="cl">Outlined diagonal cells use <span class="nw">same-skill</span> donors.</span></figcaption>
       </figure>
     </div>
 
     <div class="block">
       <h3>Both counterfactual terms matter</h3>
       <p class="block-text"><span class="math">ℒ<sub>skill</sub></span> alone does not improve undemonstrated combinations. Adding <span class="math">ℒ<sub>change</sub></span> helps, and combining <span class="math">ℒ<sub>change</sub></span> with <span class="math">ℒ<sub>preserve</sub></span> yields by far the highest undemonstrated success while maintaining demonstrated success.</p>
-      <p class="table-cap">Training-objective ablations on Pick-Place (%). All variants include <span class="math">ℒ<sub>fm</sub></span>.</p>
+      <p class="table-cap"><span class="nw">Training-objective</span> ablations on <span class="nw">Pick-Place</span> (%). All variants include <span class="math">ℒ<sub>fm</sub></span>.</p>
       <div class="table-wrap">
         <table class="data ablation">
           <thead>
@@ -429,12 +454,12 @@
   <div class="container">
     <p class="eyebrow">Real robot</p>
     <h2>Compositional generalization on a real robot</h2>
-    <div class="split">
+    <div class="split tuned" style="--tw: 55.7692%">
       <div class="split-text">
-        <p>A Piper 6-DoF arm performs Pick-Place with four colored cubes and four colored plates, using third-person and wrist cameras. The demonstrations contain 20 episodes for each of the four same-color combinations; the other 12 combinations are undemonstrated. Both methods fine-tune π<sub>0.5</sub> on the same data and are evaluated over five trials per combination.</p>
+        <p>A Piper <span class="nw">6-DoF</span> arm performs <span class="nw">Pick-Place</span> with four colored cubes and four colored plates, using <span class="nw">third-person</span> and wrist cameras. The demonstrations contain 20 episodes for each of the four <span class="nw">same-color</span> combinations; the other 12 combinations are undemonstrated. Both methods <span class="nw">fine-tune</span> π<sub>0.5</sub> on the same data and are evaluated over five trials per combination.</p>
       </div>
       <div class="split-aside">
-        <p class="table-cap">Real-robot success (successful / total trials)</p>
+        <p class="table-cap"><span class="nw">Real-robot</span> success (successful / total trials)</p>
         <div class="table-wrap">
           <table class="data compact">
             <thead><tr><th class="left">Method</th><th>Demo.</th><th class="emph">Undem.</th></tr></thead>
@@ -447,10 +472,10 @@
       </div>
     </div>
   </div>
-  <div class="container wide">
+  <div class="container">
     <figure class="fig">
       <img src="static/images/real_robot.webp" width="2400" height="646" loading="lazy" alt="Real-robot rollouts for pick the blue cube and place it on the green plate. CRAFT succeeds; FT Full places the blue cube on the blue plate and fails.">
-      <figcaption>Undemonstrated “pick the blue cube and place it on the green plate.” Both methods pick the blue cube, but CRAFT places it on the instructed green plate, whereas FT (Full) places it on the blue plate, the demonstrated blue-to-blue combination.</figcaption>
+      <figcaption><span class="cl">Undemonstrated “pick the blue cube and place it on the green plate.”</span><span class="cl">Both methods pick the blue cube, but CRAFT places it on the instructed green plate,</span><span class="cl">whereas FT (Full) places it on the blue plate, the demonstrated <span class="nw">blue-to-blue</span> combination.</span></figcaption>
     </figure>
     <!-- CRAFT (pi0.5) on undemonstrated combinations, real-time; built by tools/make_real_videos.py -->
     <div class="video-grid">
@@ -475,12 +500,12 @@
         <div class="vbox"><video muted loop playsinline preload="metadata" poster="static/images/real_blue_red_poster.webp" aria-label="CRAFT on the real robot: pick the blue cube and place it on the red plate"></video><div class="ph"><span class="ph-title">Video</span><code class="ph-path"></code></div></div>
       </div>
     </div>
-    <p class="fig-note">CRAFT (π<sub>0.5</sub>) on undemonstrated combinations; all videos play at real-time speed.</p>
+    <p class="fig-note">CRAFT (π<sub>0.5</sub>) on undemonstrated combinations; all videos play at <span class="nw">real-time</span> speed.</p>
   </div>
 </section>
 
 <section class="section" id="bibtex">
-  <div class="container narrow">
+  <div class="container">
     <h2>BibTeX</h2>
     <!-- TODO: fill in the arXiv ID -->
     <div class="bibtex">
@@ -503,6 +528,6 @@
   </div>
 </footer>
 
-<script src="static/js/main.js"></script>
+<script src="static/js/main.js?v=20260930a"></script>
 </body>
 </html>
