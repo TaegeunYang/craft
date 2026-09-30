@@ -452,34 +452,30 @@
       <img src="static/images/real_robot.webp" width="2400" height="646" loading="lazy" alt="Real-robot rollouts for pick the blue cube and place it on the green plate. CRAFT succeeds; FT Full places the blue cube on the blue plate and fails.">
       <figcaption>Undemonstrated “pick the blue cube and place it on the green plate.” Both methods pick the blue cube, but CRAFT places it on the instructed green plate, whereas FT (Full) places it on the blue plate, the demonstrated blue-to-blue combination.</figcaption>
     </figure>
-    <!-- TODO: add real-robot rollout videos (see README for file names) -->
+    <!-- CRAFT (pi0.5) on undemonstrated combinations, real-time; built by tools/make_real_videos.py -->
     <div class="video-grid">
+      <div class="vslot" data-src="static/videos/real/blue_green_craft.mp4">
+        <div class="combo-label"><span class="ent-s"><i class="sw cube blue"></i>blue cube</span><span class="arrow">→</span><span class="ent-s"><i class="sw plate green"></i>green plate</span></div>
+        <div class="vbox"><video muted loop playsinline preload="metadata" poster="static/images/real_blue_green_poster.webp" aria-label="CRAFT on the real robot: pick the blue cube and place it on the green plate"></video><div class="ph"><span class="ph-title">Video</span><code class="ph-path"></code></div></div>
+      </div>
       <div class="vslot" data-src="static/videos/real/red_yellow_craft.mp4">
-        <div class="vlabel is-craft">red cube → yellow plate</div>
-        <div class="vbox"><video muted loop playsinline preload="metadata"></video><div class="ph"><span class="ph-title">Video coming soon</span><code class="ph-path"></code></div></div>
+        <div class="combo-label"><span class="ent-s"><i class="sw cube red"></i>red cube</span><span class="arrow">→</span><span class="ent-s"><i class="sw plate yellow"></i>yellow plate</span></div>
+        <div class="vbox"><video muted loop playsinline preload="metadata" poster="static/images/real_red_yellow_poster.webp" aria-label="CRAFT on the real robot: pick the red cube and place it on the yellow plate"></video><div class="ph"><span class="ph-title">Video</span><code class="ph-path"></code></div></div>
       </div>
       <div class="vslot" data-src="static/videos/real/yellow_blue_craft.mp4">
-        <div class="vlabel is-craft">yellow cube → blue plate</div>
-        <div class="vbox"><video muted loop playsinline preload="metadata"></video><div class="ph"><span class="ph-title">Video coming soon</span><code class="ph-path"></code></div></div>
+        <div class="combo-label"><span class="ent-s"><i class="sw cube yellow"></i>yellow cube</span><span class="arrow">→</span><span class="ent-s"><i class="sw plate blue"></i>blue plate</span></div>
+        <div class="vbox"><video muted loop playsinline preload="metadata" poster="static/images/real_yellow_blue_poster.webp" aria-label="CRAFT on the real robot: pick the yellow cube and place it on the blue plate"></video><div class="ph"><span class="ph-title">Video</span><code class="ph-path"></code></div></div>
       </div>
       <div class="vslot" data-src="static/videos/real/yellow_red_craft.mp4">
-        <div class="vlabel is-craft">yellow cube → red plate</div>
-        <div class="vbox"><video muted loop playsinline preload="metadata"></video><div class="ph"><span class="ph-title">Video coming soon</span><code class="ph-path"></code></div></div>
+        <div class="combo-label"><span class="ent-s"><i class="sw cube yellow"></i>yellow cube</span><span class="arrow">→</span><span class="ent-s"><i class="sw plate red"></i>red plate</span></div>
+        <div class="vbox"><video muted loop playsinline preload="metadata" poster="static/images/real_yellow_red_poster.webp" aria-label="CRAFT on the real robot: pick the yellow cube and place it on the red plate"></video><div class="ph"><span class="ph-title">Video</span><code class="ph-path"></code></div></div>
       </div>
       <div class="vslot" data-src="static/videos/real/blue_red_craft.mp4">
-        <div class="vlabel is-craft">blue cube → red plate</div>
-        <div class="vbox"><video muted loop playsinline preload="metadata"></video><div class="ph"><span class="ph-title">Video coming soon</span><code class="ph-path"></code></div></div>
+        <div class="combo-label"><span class="ent-s"><i class="sw cube blue"></i>blue cube</span><span class="arrow">→</span><span class="ent-s"><i class="sw plate red"></i>red plate</span></div>
+        <div class="vbox"><video muted loop playsinline preload="metadata" poster="static/images/real_blue_red_poster.webp" aria-label="CRAFT on the real robot: pick the blue cube and place it on the red plate"></video><div class="ph"><span class="ph-title">Video</span><code class="ph-path"></code></div></div>
       </div>
     </div>
-  </div>
-  <div class="container">
-    <details class="more">
-      <summary>More real-robot rollouts</summary>
-      <figure class="fig">
-        <img src="static/images/real_robot_more.webp" width="2000" height="1123" loading="lazy" alt="Four real-robot rollouts of CRAFT on undemonstrated combinations: red cube to yellow plate, yellow cube to blue plate, yellow cube to red plate, and blue cube to red plate.">
-        <figcaption>CRAFT picks the instructed cube and places it on the instructed plate, although these cube–plate combinations are absent from the demonstrations.</figcaption>
-      </figure>
-    </details>
+    <p class="fig-note">CRAFT (π<sub>0.5</sub>) on undemonstrated combinations; all videos play at real-time speed.</p>
   </div>
 </section>
 

@@ -27,7 +27,7 @@ Drop MP4 files (H.264, muted) at these paths; the page picks them up automatical
 | Explorer, Pick-Place | `static/videos/explorer/pick_place/{cube}_{plate}_{ft,craft}.mp4` |
 | Explorer, Pick-Place-Press | `static/videos/explorer/pick_place_press/{cube}_{plate}_{button}_{ft,craft}.mp4` |
 | Instruction change | `static/videos/instruction_change.webm` + `instruction_change_hevc.mov` (transparent; built by `tools/make_instruction_video.py`) |
-| Real robot | `static/videos/real/{cube}_{plate}_craft.mp4` |
+| Real robot | `static/videos/real/{cube}_{plate}_craft.mp4` (4:3 crop + "x1"; built by `tools/make_real_videos.py`) |
 
 Colors are `red`, `blue`, `green`, `yellow` (Press: `red`, `blue`).
 
@@ -46,4 +46,4 @@ python tools/render_figures.py path/to/Figures
 - [ ] arXiv link and ID (Paper button, BibTeX)
 - [ ] Code link (Code button)
 - [ ] Remove the `<meta name="robots" content="noindex, nofollow">` tag at the public launch
-- [ ] Rollout videos (table above); set `--video-ratio` in `static/css/style.css` to match them
+- [ ] Explorer rollout videos (table above); set `--video-ratio` in `static/css/style.css` to match them
