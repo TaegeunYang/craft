@@ -65,10 +65,14 @@
     <p class="affil">KAIST</p>
 
     <div class="links">
-      <!-- paper PDF (arXiv version); add an arXiv button once announced -->
+      <!-- paper PDF (same as the arXiv version); replace static/paper.pdf when the paper is revised -->
       <a class="btn" href="static/paper.pdf">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
         Paper
+      </a>
+      <a class="btn" href="https://arxiv.org/abs/2610.00524">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v4H3zM5 9v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9M10 13h4"/></svg>
+        arXiv
       </a>
       <!-- TODO: set href to the code repository -->
       <a class="btn is-soon" aria-disabled="true">
@@ -511,9 +515,14 @@
 <section class="section" id="bibtex">
   <div class="container">
     <h2>BibTeX</h2>
-    <!-- TODO: add the BibTeX entry and restore the Copy button (<button type="button" class="copy" id="copy-bib">Copy</button>) once the arXiv version is out -->
     <div class="bibtex">
-      <pre><code id="bib">TBD</code></pre>
+      <button type="button" class="copy" id="copy-bib">Copy</button>
+      <pre><code id="bib">@article{yang2026craft,
+  title   = {Same Scene, Different Task: Skill Alignment for Compositional Generalization in {VLAs}},
+  author  = {Yang, Taegeun and Na, Youngju and Cho, Yoonki and Yoon, Sung-Eui},
+  journal = {arXiv preprint arXiv:2610.00524},
+  year    = {2026}
+}</code></pre>
     </div>
   </div>
 </section>
