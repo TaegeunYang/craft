@@ -1,7 +1,7 @@
 # Same Scene, Different Task — project page
 
 Static project page for *Same Scene, Different Task: Skill Alignment for Compositional Generalization in VLAs* (CRAFT).
-Plain HTML/CSS/JS, no build step, no analytics, no third-party requests.
+Plain HTML/CSS/JS, no build step. Visit statistics use GoatCounter (no cookies; dashboard at https://xorms2001.goatcounter.com); there are no other third-party requests.
 
 ## Preview locally
 
